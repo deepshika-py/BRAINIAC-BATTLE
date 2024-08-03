@@ -1,0 +1,171 @@
+from colorama import *
+from random import *
+s=0
+e=True
+m=True
+h=True
+def disp():
+    for x in range(83):
+        print(Fore.RESET+'*', end=' ')
+def bold(text):
+    bold_start = '\033[1m'
+    bold_end = '\033[0m'
+    return bold_start + text + bold_end
+def inst():
+    disp()
+    print(bold('\n\t\t\t\t\t\t\t\t\tINSTRUCTIONS'))
+    disp()
+    print('''
+You will be given a General Knowledge quiz, to which you may choose your difficulty level: Easy, Medium, Hard.
+
+
+- Easy level: 1 point will be awarded for right answers & no negative marking.
+- Medium level: 5 points will be awarded for right answers & 1 point will be deducted for every wrong answer.
+- Hard level: 10 points will be awarded for right answers & 5 points will be deducted for every wrong answer.
+
+
+Each level has 10 questions, after attempting all 10 questions, players will be asked to choose another level depending on their score.
+
+
+NOTE: Players can attempt each level only once.
+
+
+Once the player has reached 100 points they will automatically be redirected to the 'Guess the Number' game.
+
+
+Separate instructions will be given thereafter.''')
+def ez_lvl():
+    global s
+    disp()
+    print(bold("\n\t\t\t\t\t\t\t\t\tEASY LEVEL"))
+    disp()
+    q={1:"Name the country known as the Land of the Rising Sun?",2:"How many seconds make one hour? \n(Enter numerical value)",3:"Who designed the National Flag of India? \n(Enter full name)",4:"How many continents are there in the world? \n(Enter numerical value)",5:"Who discovered electricity? \n(Enter full name)",6:"Name a bird that lays the largest eggs?",7:"Which is the tallest mountain in the world? \n(Enter as Mount..)",8:"How many years are there in one Millenium? \n(Enter numerical value)",9:"Name the first man to walk on the Moon? \n(Enter full name)",10:"Which festival is called the festival of colours?"}
+    a={1:"JAPAN",2:'3600',3:"PINGALI VENKAYYA",4:'7',5:"BENJAMIN FRANKLIN",6:"OSTRICH",7:"MOUNT EVEREST",8:'1000',9:"NEIL ARMSTRONG",10:"HOLI"}
+    l=[1,2,3,4,5,6,7,8,9,10]
+    shuffle(l)
+    for x in range(10):
+        print(Fore.RESET+'\nQuestion',x+1,q[l[x]])
+        ch=input("Enter your answer: ")
+        if ch.upper()==a[l[x]]:
+            print(Fore.GREEN+"\nCorrect Answer!")
+            s+=1
+        else:
+            print(Fore.RED+"\nWrong answer")
+    print(bold(Fore.RESET+"\nEND OF EASY LEVEL"))
+def med_lvl():
+    global s
+    disp()
+    print(bold('\n\t\t\t\t\t\t\t\t\tMEDIUM LEVEL'))
+    disp()
+    q={1:"How many colours does sunlight consist of? \n(Enter numerical value)",2:"Which place is the Kamakhya Temple located?",3:"MS-Word is an example of _____ software?",4:"Ctrl, Shift and Alt are called __ keys.",5:"National Income estimates in India are prepared by?",6:"Who invented the Light Bulb? \n(Enter full name)",7:"Who discovered Penicillin? \n(Enter full name)",8:"Which planet in our Solar System takes the longest time to complete its revolution around the Sun?",9:"Which is the longest river on Earth? \n(Enter only river name)",10:"Which is the smallest bird in the world?"}
+    a={1:'7',2:'ASSAM',3:'APPLICATION',4:'MODIFIER',5:'CENTRAL STATISTICAL ORGANISATION',6:'THOMAS ALVA EDISON',7:'ALEXANDER FLEMING',8:'NEPTUNE',9:'NILE',10:'BEE HUMMINGBIRD'}
+    l=[1,2,3,4,5,6,7,8,9,10]
+    shuffle(l)
+    for x in range(10):
+        print(Fore.RESET+'\nQuestion',x+1,q[l[x]])
+        ch=input("Enter your answer: ")
+        if ch.upper()==a[l[x]]:
+            print(Fore.GREEN+"\nCorrect Answer!")
+            s+=5
+        else:
+            print(Fore.RED+"\nWrong answer")
+            s-=1
+    print(bold(Fore.RESET+"\nEND OF MEDIUM LEVEL"))
+def hrd_lvl():
+    global s
+    disp()
+    print(bold("\n\t\t\t\t\t\t\t\t\tHARD LEVEL"))
+    disp()
+    q={1:"Name an alloy of mercury?",2:"Which Porsche model is named after a South American crocodile?",3:"Which state in India is the oldest producer of oil?",4:"Who said the famous slogan, 'Tum Mujhe Khoon Do, Main Tumhe Aazadi Dunga'? \n(Enter full name)",5:"Which state in India is known as 'Silicon State'?",6:"What type of tree is pictured on the Lebanese flag?",7:"How old was Queen Elizabeth when she died? \n(Enter numerical value)",8:"How many stars are on the flag of New Zealand? \n(Enter numerical value)",9:"What is the chemical symbol for Tungsten?",10:"What is the capital of Tajikistan?"}
+    a={1:"AMALGAM",2:"CAYMAN",3:'ASSAM',4:'SUBHAS CHANDRA BOSE',5:'KARNATAKA',6:'CEDAR',7:'96',8:'4',9:'W',10:'DUSHANBE'}
+    l=[1,2,3,4,5,6,7,8,9,10]
+    shuffle(l)
+    for x in range(10):
+        print(Fore.RESET+'\nQuestion',x+1,q[l[x]])
+        ch=input("Enter your answer: ")
+        if ch.upper()==a[l[x]]:
+            print(Fore.GREEN+"\nCorrect Answer!")
+            s+=10
+        else:
+            print(Fore.RED+"\nWrong answer")
+            s-=5
+    print(bold(Fore.RESET+"\nEND OF HARD LEVEL"))
+def guess_no():
+    disp()
+    print(bold('\n\t\t\t\t\t\t\t\tWelcome to Guess the Number'))
+    disp()
+    print(bold('\nHow to play?'))
+    print('''A number from 1 to 100 will be generated by the computer, and the player will have to enter their guesses.
+There are no limits to the attempts.
+Have fun playing!''')
+    n=int(input(bold('How many rounds do you wish to play? \n=> ')))
+    for x in range(1,n+1):
+        disp()
+        print('\n\t\t\t\t\t\t\t\t\tRound',x)
+        disp()
+        attempts=0
+        num=randint(1,100)
+        while True:
+            guess=int(input(bold('\nEnter your guess: ')))
+            attempts+=1
+            if guess<num:
+                print("You guessed lower than the number. Try again!")
+            elif guess>num:
+                print("You guessed higher than the number. Try again!")
+            elif guess==num:
+                print(Fore.GREEN+"Congrats! You guessed the number in",attempts,'attempts!')
+                break
+    disp()
+    print(bold("\n\n\t\t\t\t\t\t\t\t\tYOU HAVE REACHED THE BRANIAC BATTLE'S END\n"))
+    disp()
+def game():
+    global e,m,h
+    while s<100:
+        disp()
+        print(bold('\nChoose your difficulty level:'),'\n1. Easy \n2. Medium \n3. Hard')
+        lvl=int(input(bold('Enter your choice: ')))
+        if lvl==1:
+            if e==True:
+                ez_lvl()
+                e=False
+            else:
+                print(bold("\nLevel already attempted. Choose another level"))
+        elif lvl==2:
+            if m==True:
+                med_lvl()
+                m=False
+            else:
+               print(bold("\nLevel already attempted. Choose another level"))
+        elif lvl==3:
+            if h==True:
+                hrd_lvl()
+                h=False
+            else:
+                print(bold("\nLevel already attempted. Choose another level"))
+        if s<100:
+            print(Fore.RESET+"\nYou need",100-s,"more points to be redirected to the 'Guess the Number' game.")
+            print(bold("\nDo you wish to:"),"\n1. Try another level \n2. Quit the quiz ")
+            rech=int(input(bold("Enter your choice: ")))
+            if rech==2:
+                print(bold("Exiting game..."))
+                break
+    if s>=100:
+        print("\nCongrats! You've scored",s,"points. \nYou will be redirected to the guess the number game shortly")
+        guess_no()
+disp()
+print(bold('\n\t\t\t\t\t\t\t\tWelcome to Brainiac Battle (BB)'))
+disp()
+while True:
+    print(bold('\nEnter your choice:'),'''
+    1. Instructions
+    2. Start
+    3. Exit''')
+    ch=int(input(bold("Enter option: ")))
+    if ch==1:
+        inst()
+    elif ch==2:
+        game()
+        break
+    elif ch==3:
+        print(bold("\nExiting game..."))
+        break
